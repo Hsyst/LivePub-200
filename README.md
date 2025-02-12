@@ -1,9 +1,6 @@
 # Tutorial de Uso
 Caso apenas queira realizar o download e execução do LivePub, clique aqui!
 
-# Download
-Caso queira realizar o download do LivePub, clique aqui!
-
 # LivePub - Documentação Técnica
 ## Índice:
 - Sobre o LivePub
