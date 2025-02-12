@@ -137,7 +137,7 @@ app.post('/release-live', async (req, res) => {
     return res.status(403).json({ error: 'Canal inexistente ou chave inválida' });
   }
 
-  const m3u8Url = `SERVIDOR_HLS_NGINX_AQUI`;
+  const m3u8Url = `http://localhost:9983/${channel}.m3u8`;
 
   try {
     const response = await axios.head(m3u8Url);
@@ -175,7 +175,7 @@ app.get('/rem-live', (req, res) => {
     if (err) {
       return res.status(500).json({ error: 'Erro ao remover transmissão ao vivo', details: err.message });
     }
-    fs.rmdirSync(`/var/www/html/hls/${channel}`, { recursive: true });
+    fs.rmdirSync(`/var/www/html/${channel}`, { recursive: true });
     res.json({ message: `Transmissão ao vivo do canal ${channel} foi encerrada com sucesso.` });
   });
 });
