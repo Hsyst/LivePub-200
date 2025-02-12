@@ -1,6 +1,5 @@
 # Tutorial de Uso
-Caso apenas queira realizar o download e execução do LivePub, clique aqui!
-
+Caso apenas queira realizar o download e execução do LivePub, [clique aqui!](https://github.com/Hsyst/LivePub-200/blob/main/use-tutorial.md)
 # LivePub - Documentação Técnica
 ## Índice:
 - Sobre o LivePub
