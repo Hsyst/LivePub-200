@@ -85,4 +85,26 @@ O add-channel, é um endpoint GET, que cria um canal e adiciona ao banco de dado
 Ele serve para verificar se a live já está com o arquivo .m3u8 disponivel no `Servidor HLS (HTTP) do nginx`, e ao estar disponivel ele adiciona a live ao Banco de Dados, o que faz ser liberado na página principal. Um exemplo de uso seria: `/release-live?channel=open&key=chave-do-canal-aqui`
 
 ## /rem-live
-Ele remove a transmissão ao vivo do banco de dados, o que faz com que ele saia da página principal. Um exemplo de uso seria: `/rem-live?channel=open&key=chave-do-canal-aqui`
+Ele remove a transmissão ao vivo do banco de dados, o que faz com que ele saia da página principal. Um exemplo de uso seria: `/rem-live?channel=open&key=chave-do-canal-aqui` e a resposta: `message: Transmissão ao vivo do canal ${channel} foi encerrada com sucesso.`
+
+## /get-live-streams
+Ele mostra todas as transmissões ao vivo que estão disponiveis.
+
+## /query-live-streams?query=pesquise-aqui
+Ele mostra todas as transmissões que se conformam no parâmetro "query". Porém, ainda não foi implementado pois não temos tráfego o suficiente pra isso.
+
+## /get-channels
+Ele mostra todos os canais cadastrados.
+
+
+# Fluxos
+Esta aplicação não contém fluxos, pois cada endpoint é individual e não depende do outro diretamente.
+
+# Créditos
+Este projeto foi criado por Humberto [(Discord Nick: op3n / Github: op3ny)](https://github.com/op3ny) e é um prazer ver você interessado nele!
+
+# Finalização
+Esta foi a documentação técnica do LivePub. Caso queira testar o projeto, acesse: [clique aqui!](https://hsyst.xyz/html/livepub)
+
+# Licença
+Este projeto está licenciado pela licença [MIT](https://github.com/Hsyst/LivePub-200/blob/main/LICENSE), e portanto, o uso dela está condicionado a esta licença.
