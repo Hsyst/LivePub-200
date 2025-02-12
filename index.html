@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - LivePub</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.reflowhq.com/v2/toolkit.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <!-- Adicionando hls.js para reprodução de vídeos .m3u8 -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+    <style>
+        /* Ajustes para o player de vídeo */
+        .video-js {
+            width: 100%;
+            height: 300px; /* Altura fixa para o player */
+        }
+
+        /* Ajustes para os cards */
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-expand" id="sidebar-wrapper">
+        <div class="container">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav sidebar-nav" id="sidebar-nav">
+                    <li class="nav-item sidebar-brand"><a class="nav-link active" href="#page-top">LivePub</a></li>
+                    <li class="nav-item sidebar-nav-item"><a class="nav-link" href="#page-top">Home</a></li>
+                    <li class="nav-item sidebar-nav-item"><a class="nav-link" href="#live-streams">Transmissões</a></li>
+                    <li class="nav-item sidebar-nav-item"><a class="nav-link" href="#contact">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="d-flex masthead" style="background: #317a68;">
+        <div class="container my-auto text-center">
+            <h1 class="mb-1">LivePub (2.0.0)</h1>
+            <h3 class="mb-5"><em>Bem Vindo(a)!</em></h3>
+            <div></div>
+            <a class="btn btn-primary btn-xl" role="button" href="create-a-channel.html">Crie um canal!</a>
+        </div>
+    </header>
+    <section id="live-streams" class="content-section bg-light" style="background: rgb(255,255,255);">
+        <div class="container">
+            <h2 class="text-center mb-4">Transmissões Ao Vivo</h2>
+            <div id="live-streams-list" class="row">
+                <!-- Transmissões ao vivo serão carregadas aqui -->
+            </div>
+        </div>
+    </section>
+    <section class="content-section bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="mb-4">Acesse nossas redes!</h2>
+            <a class="btn btn-light btn-xl me-4" role="button" href="https://discord.gg/n5hg5uMFCj">Discord</a>
+            <a class="btn btn-dark btn-xl me-4" role="button" href="https://github.com/Hsyst">GitHub</a>
+        </div>
+    </section>
+    <footer class="footer text-center">
+        <div class="container">
+            <p class="text-muted mb-0 small">Copyright &nbsp;© Hsyst 2025</p>
+        </div>
+        <a class="scroll-to-top rounded" href="#page-top"><i class="fa fa-angle-up"></i></a>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/stylish-portfolio.js"></script>
+    <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+    <script>
+        // Função para carregar as transmissões ao vivo
+        async function loadLiveStreams() {
+            try {
+                const response = await fetch('http://localhost:3000/get-live-streams');
+                const data = await response.json();
+                const liveStreamsList = document.getElementById('live-streams-list');
+                liveStreamsList.innerHTML = '';
+
+                data.liveStreams.forEach(stream => {
+                    const streamCard = `
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">${stream.channel}</h5>
+                                    <video id="player-${stream.channel}" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="300">
+                                        <source src="${stream.m3u8_url}" type="application/x-mpegURL">
+                                        Seu navegador não suporta a reprodução de vídeo.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    liveStreamsList.innerHTML += streamCard;
+
+                    // Inicializar o player Video.js com suporte a HLS
+                    const player = videojs(`player-${stream.channel}`, {
+                        controls: true,
+                        autoplay: false,
+                        preload: 'auto',
+                        techOrder: ['html5', 'hls'], // Prioriza HLS.js
+                        sources: [{
+                            src: `${stream.m3u8_url}/${stream.channel}.m3u8`,
+                            type: 'application/x-mpegURL'
+                        }]
+                    });
+
+                    // Verifica se o HLS.js é necessário
+                    if (Hls.isSupported()) {
+                        const hls = new Hls();
+                        hls.loadSource(stream.m3u8_url);
+                        hls.attachMedia(player.tech().el());
+                        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                            player.play();
+                        });
+                    } else if (player.tech().el().canPlayType('application/vnd.apple.mpegurl')) {
+                        // Suporte nativo para HLS (Safari, Edge, etc.)
+                        player.src(`${stream.m3u8_url}/${stream.channel}.m3u8`);
+                        player.play();
+                    }
+                });
+            } catch (error) {
+                console.error('Erro ao carregar as transmissões ao vivo:', error);
+            }
+        }
+
+        // Carregar as transmissões ao vivo ao abrir a página
+        window.onload = loadLiveStreams;
+    </script>
+</body>
+
+</html>

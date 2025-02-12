@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+</head>
+
+<body id="page-top">
+    <header class="d-flex masthead" style="background: #a5dd83;">
+        <div class="container my-auto text-center">
+            <h1 class="mb-1">Mostre</h1>
+            <h2 class="mb-5"><em>seus talentos!</em></h2>
+            <div></div>
+            <p style="font-size: 24px;">Que tal realizar uma transmissão ao vivo gratuita?<br><br>--&gt; Saiba mais abaixo!!! &lt;--</p>
+        </div>
+    </header>
+    <section id="about" class="content-section bg-light" style="background: rgb(255,255,255);">
+        <h1>Primeiro:</h1>
+        <p>Para realizar uma transmissão ao vivo, você precisa de <strong>uma conta </strong>no LivePub. Relaxa, é fácil. Aqui em baixo já tem o formulário pra te facilitar!</p>
+        <section class="position-relative py-4 py-xl-5">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                        <div class="card mb-5">
+                            <div class="card-body p-sm-5">
+                                <h2 class="text-center mb-4">Crie uma conta!</h2>
+                                <form id="create-channel-form">
+                                    <div class="mb-3">
+                                        <input class="form-control" type="text" id="name-2" name="name" placeholder="Nome do Canal" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control" type="text" id="desc-2" name="desc" placeholder="Descrição do seu canal" required>
+                                    </div>
+                                    <div class="mb-3"></div>
+                                    <div>
+                                        <button class="btn btn-primary d-block w-100" type="submit">Criar a conta!</button>
+                                    </div>
+                                </form>
+                                <p id="create-channel-message" class="mt-3 text-center"></p>
+                                <p><strong><span style="background-color: rgb(255, 0, 0);">ATENÇÃO</span></strong>: <strong><span style="text-decoration: underline; color: rgb(255, 15, 0);">GUARDE A "KEY" QUE FOI PASSADA PARA VOCÊ</span></strong>, ELA É NECESSÁRIA PARA LIBERAR A TRANSMISSÃO EM SEU CANAL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <h1>Segundo:</h1>
+        <p>Para realizar a transmissão ao vivo, você precisa do aplicativo <strong><span style="text-decoration: underline;">OBS</span></strong>&nbsp;<strong><span style="text-decoration: underline;">Studio</span></strong>, essa ferramenta é a mais utilizada para realizar transmissões ao vivo!<br><br>Credenciais para transmissão:<br>&nbsp; &nbsp; Serviço de transmissão: "Personalizado"<br>&nbsp; &nbsp; Endereço RTMP: "rtmp://rtmp.livepub.hsyst.xyz/live/ <span style="color: rgb(0, 0, 0);">"</span><br>&nbsp; &nbsp; Senha: Nome do seu canal</p>
+        <h1>Terceiro:</h1>
+        <p>Pronto! Agora sua transmissão já está sendo realizada, agora é só preencher o formulário de liberação abaixo, e pronto! Já estará disponível para todos assistirem! (Pode demorar de 30s a 1 minuto para a liberação estar disponivel, tente liberar de 5 em 5s)</p>
+        <section class="position-relative py-4 py-xl-5">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                        <div class="card mb-5">
+                            <div class="card-body p-sm-5">
+                                <h2 class="text-center mb-4">Formulário de Liberação</h2>
+                                <form id="release-live-form">
+                                    <div class="mb-3">
+                                        <input class="form-control" type="text" id="name-1" name="channel" placeholder="Digite o nome do canal" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control" type="text" id="key-1" name="key" placeholder="Digite a chave de liberação" required>
+                                    </div>
+                                    <div class="mb-3"></div>
+                                    <div>
+                                        <button class="btn btn-primary d-block w-100" type="submit">Liberar</button>
+                                    </div>
+                                </form>
+                                <p id="release-live-message" class="mt-3 text-center"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="content-section bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="mb-4">Acesse nossas redes!</h2>
+            <a class="btn btn-light btn-xl me-4" role="button" href="https://discord.gg/n5hg5uMFCj">Discord</a>
+            <a class="btn btn-dark btn-xl me-4" role="button" href="https://github.com/Hsyst">GitHub</a>
+        </div>
+    </section>
+    <footer class="footer text-center">
+        <div class="container">
+            <p class="text-muted mb-0 small">Copyright &nbsp;© Hsyst 2025</p>
+        </div>
+        <a class="scroll-to-top rounded" href="#page-top"><i class="fa fa-angle-up"></i></a>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/stylish-portfolio.js"></script>
+    <script>
+        // Função para criar um canal
+        document.getElementById('create-channel-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const name = formData.get('name');
+            const desc = formData.get('desc');
+
+            const response = await fetch(`http://localhost:3000/add-channel?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(desc)}`);
+            const data = await response.json();
+
+            const messageElement = document.getElementById('create-channel-message');
+            if (data.message) {
+                messageElement.textContent = `Canal criado com sucesso! Sua chave é: ${data.key}`;
+                messageElement.style.color = 'green';
+            } else {
+                messageElement.textContent = `Erro ao criar o canal: ${data.error}`;
+                messageElement.style.color = 'red';
+            }
+        });
+
+        // Função para liberar uma transmissão ao vivo
+        document.getElementById('release-live-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const channel = formData.get('channel');
+            const key = formData.get('key');
+
+            const response = await fetch(`http://localhost:3000/release-live?channel=${encodeURIComponent(channel)}&key=${encodeURIComponent(key)}`)
+            const data = await response.json();
+
+            const messageElement = document.getElementById('release-live-message');
+            if (data.message) {
+                messageElement.textContent = data.message;
+                messageElement.style.color = 'green';
+            } else {
+                messageElement.textContent = `Erro ao liberar transmissão: ${data.error}`;
+                messageElement.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+
+</html>
