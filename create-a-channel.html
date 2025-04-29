@@ -1,141 +1,875 @@
+
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html data-theme="dark" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Create a Channel - LivePub</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <title>Crie um canal - LivePub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #00ffaa;
+            --primary-hover: #00cc88;
+            --secondary: #00c8ff;
+            --dark-bg: #0a0a0a;
+            --dark-secondary: #121212;
+            --dark-tertiary: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --accent: #00ffcc;
+            --border-radius: 8px;
+            --box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* Header Styles */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-secondary) 0%, var(--dark-bg) 100%);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(0, 200, 255, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShine 3s ease-in-out infinite alternate;
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .hero p::after {
+            content: '↓';
+            display: block;
+            font-size: 2rem;
+            margin-top: 20px;
+            animation: bounce 2s infinite;
+            color: var(--primary);
+        }
+        
+        /* Animations */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: #111;
+            box-shadow: 0 4px 15px rgba(0, 255, 170, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.6);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 15px 0;
+            background-color: rgba(10, 10, 10, 0.95);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            animation: textShine 2s ease-in-out infinite alternate;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .section-content p {
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            background-color: rgba(0, 255, 170, 0.1);
+            padding: 2px 5px;
+            border-radius: 4px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .warning {
+            background-color: rgba(255, 50, 50, 0.1);
+            padding: 15px;
+            border-left: 3px solid #ff3232;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--dark-secondary);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0, 200, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .form-container:hover {
+            border-color: rgba(0, 200, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--dark-tertiary);
+            border: 1px solid rgba(0, 200, 255, 0.1);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 255, 170, 0.2);
+        }
+        
+        .form-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: var(--border-radius);
+        }
+        
+        .form-message.success {
+            background-color: rgba(0, 255, 170, 0.1);
+            color: var(--primary);
+        }
+        
+        .form-message.error {
+            background-color: rgba(255, 50, 50, 0.1);
+            color: #ff3232;
+        }
+        
+        /* Steps */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px auto;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 0;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            background-color: var(--dark-bg);
+            padding: 0 15px;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-secondary);
+            padding: 60px 0 30px;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid rgba(0, 255, 170, 0.1);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer p {
+            color: var(--text-secondary);
+            margin: 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .social-link {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+        }
+        
+        .social-link:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            background-color: rgba(0, 255, 170, 0.1);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-secondary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 30px;
+            }
+        }
+    </style>
 </head>
 
-<body id="page-top">
-    <header class="d-flex masthead" style="background: #a5dd83;">
-        <div class="container my-auto text-center">
-            <h1 class="mb-1">Mostre</h1>
-            <h2 class="mb-5"><em>seus talentos!</em></h2>
-            <div></div>
-            <p style="font-size: 24px;">Que tal realizar uma transmissão ao vivo gratuita?<br><br>--&gt; Saiba mais abaixo!!! &lt;--</p>
+<body>
+    <!-- Particles Background -->
+    <canvas id="particles" class="particles"></canvas>
+
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#page-top" class="logo animate__animated animate__fadeIn">LivePub</a>
+            <div class="nav-links">
+                <a href="/html/livepub/" class="nav-link animate__animated animate__fadeIn">Home</a>
+                <a href="#create-channel" class="nav-link animate__animated animate__fadeIn">Criar Canal</a>
+                <a href="#release-live" class="nav-link animate__animated animate__fadeIn">Liberar Transmissão</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="page-top">
+        <div class="container hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Mostre seus talentos!</h1>
+            <h2 class="animate__animated animate__fadeIn animate__delay-1s">Transmissão ao vivo gratuita para todos</h2>
+            <p class="animate__animated animate__fadeIn animate__delay-2s">Siga os passos abaixo para começar sua jornada como streamer na nossa plataforma</p>
         </div>
     </header>
-    <section id="about" class="content-section bg-light" style="background: rgb(255,255,255);">
-        <h1>Primeiro:</h1>
-        <p>Para realizar uma transmissão ao vivo, você precisa de <strong>uma conta </strong>no LivePub. Relaxa, é fácil. Aqui em baixo já tem o formulário pra te facilitar!</p>
-        <section class="position-relative py-4 py-xl-5">
-            <div class="container position-relative">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                        <div class="card mb-5">
-                            <div class="card-body p-sm-5">
-                                <h2 class="text-center mb-4">Crie uma conta!</h2>
-                                <form id="create-channel-form">
-                                    <div class="mb-3">
-                                        <input class="form-control" type="text" id="name-2" name="name" placeholder="Nome do Canal" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input class="form-control" type="text" id="desc-2" name="desc" placeholder="Descrição do seu canal" required>
-                                    </div>
-                                    <div class="mb-3"></div>
-                                    <div>
-                                        <button class="btn btn-primary d-block w-100" type="submit">Criar a conta!</button>
-                                    </div>
-                                </form>
-                                <p id="create-channel-message" class="mt-3 text-center"></p>
-                                <p><strong><span style="background-color: rgb(255, 0, 0);">ATENÇÃO</span></strong>: <strong><span style="text-decoration: underline; color: rgb(255, 15, 0);">GUARDE A "KEY" QUE FOI PASSADA PARA VOCÊ</span></strong>, ELA É NECESSÁRIA PARA LIBERAR A TRANSMISSÃO EM SEU CANAL.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+    <main class="container">
+        <!-- Steps Indicator -->
+        <div class="steps animate__animated animate__fadeIn">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-title">Criar Conta</div>
             </div>
-        </section>
-        <h1>Segundo:</h1>
-        <p>Para realizar a transmissão ao vivo, você precisa do aplicativo <strong><span style="text-decoration: underline;">OBS</span></strong>&nbsp;<strong><span style="text-decoration: underline;">Studio</span></strong>, essa ferramenta é a mais utilizada para realizar transmissões ao vivo!<br><br>Credenciais para transmissão:<br>&nbsp; &nbsp; Serviço de transmissão: "Personalizado"<br>&nbsp; &nbsp; Endereço RTMP: "rtmp://localhost/live/ <span style="color: rgb(0, 0, 0);">"</span><br>&nbsp; &nbsp; Senha: Nome do seu canal</p>
-        <h1>Terceiro:</h1>
-        <p>Pronto! Agora sua transmissão já está sendo realizada, agora é só preencher o formulário de liberação abaixo, e pronto! Já estará disponível para todos assistirem! (Pode demorar de 30s a 1 minuto para a liberação estar disponivel, tente liberar de 5 em 5s)</p>
-        <section class="position-relative py-4 py-xl-5">
-            <div class="container position-relative">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                        <div class="card mb-5">
-                            <div class="card-body p-sm-5">
-                                <h2 class="text-center mb-4">Formulário de Liberação</h2>
-                                <form id="release-live-form">
-                                    <div class="mb-3">
-                                        <input class="form-control" type="text" id="name-1" name="channel" placeholder="Digite o nome do canal" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input class="form-control" type="text" id="key-1" name="key" placeholder="Digite a chave de liberação" required>
-                                    </div>
-                                    <div class="mb-3"></div>
-                                    <div>
-                                        <button class="btn btn-primary d-block w-100" type="submit">Liberar</button>
-                                    </div>
-                                </form>
-                                <p id="release-live-message" class="mt-3 text-center"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-title">Configurar OBS</div>
             </div>
-        </section>
-    </section>
-    <section class="content-section bg-primary text-white">
-        <div class="container text-center">
-            <h2 class="mb-4">Acesse nossas redes!</h2>
-            <a class="btn btn-light btn-xl me-4" role="button" href="https://discord.gg/n5hg5uMFCj">Discord</a>
-            <a class="btn btn-dark btn-xl me-4" role="button" href="https://github.com/Hsyst">GitHub</a>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-title">Liberar Transmissão</div>
+            </div>
         </div>
-    </section>
-    <footer class="footer text-center">
+
+        <!-- Step 1: Create Account -->
+        <section id="create-channel" class="section">
+            <h2 class="section-title animate__animated animate__fadeIn">Primeiro Passo</h2>
+            <div class="section-content animate__animated animate__fadeIn animate__delay-1s">
+                <p>Para realizar uma transmissão ao vivo, você precisa de <span class="highlight">uma conta no LivePub</span>. Não se preocupe, o processo é rápido e simples!</p>
+                <p>Preencha o formulário abaixo para criar seu canal e receber sua chave de acesso exclusiva.</p>
+            </div>
+
+            <div class="form-container animate__animated animate__fadeIn animate__delay-2s">
+                <h3 class="form-title">Crie sua conta</h3>
+                <form id="create-channel-form">
+                    <div class="form-group">
+                        <label for="name-2" class="form-label">Nome do Canal</label>
+                        <input class="form-control" type="text" id="name-2" name="name" placeholder="Digite o nome do seu canal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc-2" class="form-label">Descrição do Canal</label>
+                        <input class="form-control" type="text" id="desc-2" name="desc" placeholder="Descreva brevemente seu canal" required>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary d-block w-100" type="submit">
+                            <i class="fas fa-plus-circle" style="margin-right: 8px;"></i> Criar Canal
+                        </button>
+                    </div>
+                </form>
+                <div id="create-channel-message" class="form-message"></div>
+                <div class="warning animate__animated animate__pulse animate__infinite">
+                    <strong>ATENÇÃO:</strong> <span style="text-decoration: underline;">GUARDE A "KEY" QUE FOI PASSADA PARA VOCÊ</span>, ELA É NECESSÁRIA PARA LIBERAR A TRANSMISSÃO EM SEU CANAL.
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: OBS Setup -->
+        <section class="section">
+            <h2 class="section-title animate__animated animate__fadeIn">Segundo Passo</h2>
+            <div class="section-content animate__animated animate__fadeIn animate__delay-1s">
+                <p>Para realizar a transmissão ao vivo, você precisa do aplicativo <span class="highlight">OBS Studio</span>, a ferramenta mais popular e confiável para transmissões ao vivo.</p>
+                <p>Configurações necessárias no OBS:</p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li><strong>Serviço de transmissão:</strong> Personalizado</li>
+                    <li><strong>Endereço RTMP:</strong> <code>rtmp://rtmp.livepub.hsyst.xyz/live/</code></li>
+                    <li><strong>Senha:</strong> Nome do seu canal (o mesmo que você criou acima)</li>
+                </ul>
+                <p>Assim que configurar o OBS e iniciar a transmissão, prossiga para o próximo passo.</p>
+            </div>
+        </section>
+
+        <!-- Step 3: Release Stream -->
+        <section id="release-live" class="section">
+            <h2 class="section-title animate__animated animate__fadeIn">Terceiro Passo</h2>
+            <div class="section-content animate__animated animate__fadeIn animate__delay-1s">
+                <p>Pronto! Agora sua transmissão já está sendo realizada, mas precisa ser liberada para ficar visível para o público.</p>
+                <p>Preencha o formulário abaixo com os dados do seu canal e a chave que recebeu ao criar sua conta.</p>
+                <p><em>Obs: Pode demorar de 30s a 1 minuto para a liberação estar disponível. Caso não funcione, tente novamente após 5 segundos.</em></p>
+            </div>
+
+            <div class="form-container animate__animated animate__fadeIn animate__delay-2s">
+                <h3 class="form-title">Liberar Transmissão</h3>
+                <form id="release-live-form">
+                    <div class="form-group">
+                        <label for="name-1" class="form-label">Nome do Canal</label>
+                        <input class="form-control" type="text" id="name-1" name="channel" placeholder="Digite o nome do canal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="key-1" class="form-label">Chave de Liberação</label>
+                        <input class="form-control" type="text" id="key-1" name="key" placeholder="Digite a chave de liberação" required>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary d-block w-100" type="submit">
+                            <i class="fas fa-broadcast-tower" style="margin-right: 8px;"></i> Liberar Transmissão
+                        </button>
+                    </div>
+                </form>
+                <div id="release-live-message" class="form-message"></div>
+            </div>
+        </section>
+
+        <!-- Social Links -->
+        <section class="section">
+            <div class="section-content text-center">
+                <h2 class="section-title animate__animated animate__fadeIn">Conecte-se Conosco</h2>
+                <div class="social-links animate__animated animate__fadeIn animate__delay-1s">
+                    <a href="https://discord.gg/n5hg5uMFCj" class="social-link">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://github.com/Hsyst" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
         <div class="container">
-            <p class="text-muted mb-0 small">Copyright &nbsp;© Hsyst 2025</p>
+            <div class="footer-logo animate__animated animate__fadeIn">LivePub</div>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">A plataforma de streaming mais inovadora da internet, trazendo a melhor experiência para streamers e espectadores.</p>
+            <div class="copyright animate__animated animate__fadeIn animate__delay-2s">
+                Copyright © 2025 Hsyst. Todos os direitos reservados.
+            </div>
         </div>
-        <a class="scroll-to-top rounded" href="#page-top"><i class="fa fa-angle-up"></i></a>
     </footer>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/stylish-portfolio.js"></script>
+
     <script>
-        // Função para criar um canal
+        // Particles Background
+        function initParticles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = window.innerWidth < 768 ? 30 : 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3 + 1,
+                    speedX: Math.random() * 0.5 - 0.25,
+                    speedY: Math.random() * 0.5 - 0.25,
+                    color: `rgba(0, ${Math.floor(Math.random() * 155 + 100)}, ${Math.floor(Math.random() * 155 + 100)}, ${Math.random() * 0.5 + 0.1})`
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    
+                    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+        
+        // Navbar scroll effect
+        function handleScroll() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+        
+        // Form submission handlers
         document.getElementById('create-channel-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
+            const form = e.target;
+            const formData = new FormData(form);
             const name = formData.get('name');
             const desc = formData.get('desc');
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Criando...';
+            submitBtn.disabled = true;
 
-            const response = await fetch(`http://localhost:3000/add-channel?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(desc)}`);
-            const data = await response.json();
+            try {
+                const response = await fetch(`https://api.livepub.hsyst.xyz/add-channel?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(desc)}`);
+                const data = await response.json();
 
-            const messageElement = document.getElementById('create-channel-message');
-            if (data.message) {
-                messageElement.textContent = `Canal criado com sucesso! Sua chave é: ${data.key}`;
-                messageElement.style.color = 'green';
-            } else {
-                messageElement.textContent = `Erro ao criar o canal: ${data.error}`;
-                messageElement.style.color = 'red';
+                const messageElement = document.getElementById('create-channel-message');
+                if (data.message) {
+                    messageElement.textContent = `✅ Canal criado com sucesso! Sua chave é: ${data.key}`;
+                    messageElement.className = 'form-message success';
+                    
+                    // Copy key to clipboard
+                    try {
+                        await navigator.clipboard.writeText(data.key);
+                        messageElement.textContent += ' (Chave copiada para a área de transferência)';
+                    } catch (err) {
+                        console.error('Failed to copy:', err);
+                    }
+                } else {
+                    messageElement.textContent = `❌ Erro ao criar o canal: ${data.error || 'Erro desconhecido'}`;
+                    messageElement.className = 'form-message error';
+                }
+            } catch (error) {
+                console.error('Erro ao criar o canal:', error);
+                const messageElement = document.getElementById('create-channel-message');
+                messageElement.textContent = '❌ Erro ao conectar ao servidor. Tente novamente mais tarde.';
+                messageElement.className = 'form-message error';
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
 
-        // Função para liberar uma transmissão ao vivo
         document.getElementById('release-live-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
+            const form = e.target;
+            const formData = new FormData(form);
             const channel = formData.get('channel');
             const key = formData.get('key');
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Liberando...';
+            submitBtn.disabled = true;
 
-            const response = await fetch(`http://localhost:3000/release-live?channel=${encodeURIComponent(channel)}&key=${encodeURIComponent(key)}`)
-            const data = await response.json();
+            try {
+                const response = await fetch(`https://api.livepub.hsyst.xyz/release-live?channel=${encodeURIComponent(channel)}&key=${encodeURIComponent(key)}`);
+                const data = await response.json();
 
-            const messageElement = document.getElementById('release-live-message');
-            if (data.message) {
-                messageElement.textContent = data.message;
-                messageElement.style.color = 'green';
-            } else {
-                messageElement.textContent = `Erro ao liberar transmissão: ${data.error}`;
-                messageElement.style.color = 'red';
+                const messageElement = document.getElementById('release-live-message');
+                if (data.message) {
+                    messageElement.textContent = `✅ ${data.message}`;
+                    messageElement.className = 'form-message success';
+                } else {
+                    messageElement.textContent = `❌ Erro ao liberar transmissão: ${data.error || 'Erro desconhecido'}`;
+                    messageElement.className = 'form-message error';
+                }
+            } catch (error) {
+                console.error('Erro ao liberar transmissão:', error);
+                const messageElement = document.getElementById('release-live-message');
+                messageElement.textContent = '❌ Erro ao conectar ao servidor. Tente novamente mais tarde.';
+                messageElement.className = 'form-message error';
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
+
+        // Initialize everything when page loads
+        window.onload = function() {
+            initParticles();
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Run once on load
+            
+            // Add animation classes on scroll
+            const animateElements = document.querySelectorAll('.animate__animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add(entry.target.dataset.animation);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(el => {
+                observer.observe(el);
+            });
+        };
     </script>
 </body>
 
