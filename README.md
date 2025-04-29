@@ -46,17 +46,12 @@ A configuração do Nginx está disponível em: [clique aqui!](https://github.co
 
 # Configuração do LivePub
 ## Versão SSL e MAIN
-### index.html
-```
-deve ser alterado nas versões MAIN e SSL
-```
-Primeiro, você deve alterar o [index.html](https://github.com/Hsyst/LivePub-200/blob/main/index.html) na linha 692 pelo endereço que você utiliza para acessar a `API do LivePub` que já deve estar em execução (*aprenda a executar e configurar em Tutorial de Uso*).
 
 ### create-a-channel.html
 ```
 deve ser alterado nas versões MAIN e SSL
 ```
-Segundo, você deve alterar o [create-a-channel.html](https://github.com/Hsyst/LivePub-200/blob/main/create-a-channel.html) na linha 786 e 829 pelo endereço que você utiliza para acessar a `API do LivePub` que já deve estar em execução (*aprenda a executar e configurar em Tutorial de Uso*). Ainda no create-a-channel.html, altere a linha 647 pelo servidor RTMP (NGINX).
+Segundo, você deve alterar o [create-a-channel.html](https://github.com/Hsyst/LivePub-200/blob/main/create-a-channel.html) a linha 647 pelo servidor RTMP (NGINX).
 
 ### index-ssl.js
 ```
