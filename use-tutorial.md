@@ -24,7 +24,7 @@ Agora, você deve realizar as alterações nos arquivos que são pedidos na [doc
 ### 4:
 Agora, você deve instalar o nginx e o módulo RTMP e configura-lo.
 ```
-sudo apt update && apt install nginx libnginx-mod-rtmp -y && rm -rf /etc/nginx/nginx.conf /etc/nginx/sites-enabled/* && cp ../nginx-config-files/nginx.conf /etc/nginx && cp ../nginx-config-files/default /etc/nginx/sites-enabled/ && service nginx restart
+sudo apt update && apt install nginx libnginx-mod-rtmp nodejs npm -y && rm -rf /etc/nginx/nginx.conf /etc/nginx/sites-enabled/* && cp ../nginx-config-files/nginx.conf /etc/nginx && cp ../nginx-config-files/default /etc/nginx/sites-enabled/ && service nginx restart
 ```
 
 ### 5:
