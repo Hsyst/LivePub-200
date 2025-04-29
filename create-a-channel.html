@@ -783,7 +783,7 @@
             submitBtn.disabled = true;
 
             try {
-                const response = await fetch(`https://api.livepub.hsyst.xyz/add-channel?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(desc)}`);
+                const response = await fetch(`/add-channel?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(desc)}`);
                 const data = await response.json();
 
                 const messageElement = document.getElementById('create-channel-message');
@@ -826,7 +826,7 @@
             submitBtn.disabled = true;
 
             try {
-                const response = await fetch(`https://api.livepub.hsyst.xyz/release-live?channel=${encodeURIComponent(channel)}&key=${encodeURIComponent(key)}`);
+                const response = await fetch(`/release-live?channel=${encodeURIComponent(channel)}&key=${encodeURIComponent(key)}`);
                 const data = await response.json();
 
                 const messageElement = document.getElementById('release-live-message');
